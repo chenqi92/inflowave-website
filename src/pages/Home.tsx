@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
@@ -17,9 +16,11 @@ import {
   Play
 } from 'lucide-react'
 import { useLanguage } from '../providers/LanguageProvider'
+import { useLatestVersion } from '../hooks/useRelease'
 
 const Home = () => {
   const { t } = useLanguage()
+  const { version, loading: versionLoading } = useLatestVersion()
 
   const features = [
     {
@@ -105,7 +106,7 @@ const Home = () => {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: \"spring\", stiffness: 200 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
             className="mb-8"
           >
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl shadow-2xl">
@@ -181,7 +182,7 @@ const Home = () => {
           >
             <div className="flex items-center space-x-2">
               <Star className="w-4 h-4 text-yellow-500" />
-              <span>{t('hero.version', { version: '0.1.5' })}</span>
+              <span>{t('hero.version', { version: versionLoading ? 'Loading...' : (version || '0.1.5') })}</span>
             </div>
             <div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
             <span>{t('hero.platforms')}</span>
@@ -298,7 +299,7 @@ const Home = () => {
                 </div>
                 <div className="p-4">
                   <h3 className="font-medium text-gray-900 dark:text-white">
-                    {Object.values(t('screenshots.gallery', { returnObjects: true }) as Record<string, string>)[index] || 'Screenshot'}
+                    Screenshot {index + 1}
                   </h3>
                 </div>
               </div>

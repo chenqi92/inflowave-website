@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
@@ -19,7 +18,7 @@ import { ThemeProvider } from './providers/ThemeProvider'
 import { LanguageProvider } from './providers/LanguageProvider'
 
 function App() {
-  const { i18n } = useTranslation()
+  useTranslation()
 
   return (
     <ThemeProvider>
