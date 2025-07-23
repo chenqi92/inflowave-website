@@ -318,10 +318,10 @@ const Home = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Ready to get started?
+              {t('cta.title')}
             </h2>
             <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-              Download InfloWave today and experience the most intuitive way to manage your time-series databases.
+              {t('cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -329,13 +329,13 @@ const Home = () => {
                 className="bg-white text-primary-600 hover:bg-gray-100 font-medium px-8 py-4 rounded-lg transition-colors duration-200 flex items-center space-x-2 hover-lift"
               >
                 <Download className="w-5 h-5" />
-                <span>{t('hero.downloadButton')}</span>
+                <span>{t('cta.downloadButton')}</span>
               </Link>
               <Link
                 to="/features"
                 className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium px-8 py-4 rounded-lg transition-all duration-200 flex items-center space-x-2 hover-lift"
               >
-                <span>Learn More</span>
+                <span>{t('cta.learnMore')}</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

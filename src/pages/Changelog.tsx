@@ -14,12 +14,14 @@ import {
 import { useLanguage } from '../providers/LanguageProvider'
 import { useChangelog, useFilteredReleases } from '../hooks/useChangelog'
 import MarkdownRenderer from '../components/MarkdownRenderer'
+import VersionNavigation from '../components/VersionNavigation'
 
 const Changelog = () => {
   const { t } = useLanguage()
   const { releases, loading, error, refetch } = useChangelog()
   const [searchTerm, setSearchTerm] = useState('')
   const [showPreReleases, setShowPreReleases] = useState(false)
+  const [currentVersionId, setCurrentVersionId] = useState<string>('')
   
   const filteredReleases = useFilteredReleases(releases, searchTerm, showPreReleases)
 
@@ -160,7 +162,21 @@ const Changelog = () => {
 
       {/* Releases */}
       <section className="py-12 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex gap-8">
+            {/* Version Navigation Sidebar */}
+            <div className="hidden lg:block">
+              <div className="sticky top-24">
+                <VersionNavigation
+                  releases={filteredReleases}
+                  currentVersionId={currentVersionId}
+                  onVersionSelect={setCurrentVersionId}
+                />
+              </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="flex-1 min-w-0">
           {filteredReleases.length === 0 ? (
             <div className="text-center py-12">
               <History className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -182,6 +198,7 @@ const Changelog = () => {
                 {filteredReleases.map((release, index) => (
                   <motion.article
                     key={release.id}
+                    id={`version-${release.id}`}
                     variants={itemVariants}
                     initial="hidden"
                     animate="visible"
@@ -247,6 +264,8 @@ const Changelog = () => {
               </AnimatePresence>
             </motion.div>
           )}
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -16,6 +16,12 @@
     "version": "Version {{version}}",
     "platforms": "Available for Windows, macOS & Linux"
   },
+  "cta": {
+    "title": "Ready to get started?",
+    "subtitle": "Download InfloWave today and experience the most intuitive way to manage your time-series databases.",
+    "downloadButton": "Download Now",
+    "learnMore": "Learn More"
+  },
   "features": {
     "title": "Core Features",
     "subtitle": "Everything you need for professional time-series database management",
@@ -50,6 +56,46 @@
     "performance": {
       "title": "High Performance",
       "description": "Built with Rust backend for optimal performance and memory efficiency."
+    },
+    "technicalSpecs": {
+      "title": "Technical Specifications",
+      "subtitle": "Detailed technical information and system architecture",
+      "architecture": {
+        "title": "Architecture",
+        "items": [
+          "Frontend: React 18 + TypeScript",
+          "Backend: Rust + Tauri Framework",
+          "UI Framework: Shadcn/ui + Tailwind CSS",
+          "State Management: Context API + Hooks"
+        ]
+      },
+      "compatibility": {
+        "title": "Compatibility",
+        "items": [
+          "InfluxDB 1.8.x and later versions",
+          "InfluxDB 2.0.x with Flux query support",
+          "InfluxDB Cloud integration",
+          "Cross-platform: Windows, macOS, Linux"
+        ]
+      },
+      "security": {
+        "title": "Security Features",
+        "items": [
+          "TLS/SSL encrypted connections",
+          "Token-based authentication",
+          "Local credential storage",
+          "Role-based access control"
+        ]
+      },
+      "performance": {
+        "title": "Performance Metrics",
+        "items": [
+          "Memory usage: <100MB typical",
+          "Startup time: <3 seconds",
+          "Query response: <1 second average",
+          "Concurrent connections: Up to 10"
+        ]
+      }
     }
   },
   "screenshots": {
@@ -108,7 +154,59 @@
     "refreshReleaseInfo": "Refresh release info",
     "loadingReleaseInfo": "Loading release information...",
     "failedToLoad": "Failed to Load Release Information",
-    "totalDownloads": "{{count}} total downloads"
+    "totalDownloads": "{{count}} total downloads",
+    "installation": {
+      "title": "Installation Instructions",
+      "subtitle": "Quick setup guide for each platform",
+      "windows": {
+        "steps": [
+          "Download the .msi installer",
+          "Run the installer as administrator",
+          "Follow the installation wizard",
+          "Launch InfloWave from Start Menu"
+        ]
+      },
+      "macos": {
+        "steps": [
+          "Download the .dmg file",
+          "Open the .dmg file",
+          "Drag InfloWave to Applications",
+          "Launch from Launchpad or Applications"
+        ]
+      },
+      "linux": {
+        "steps": [
+          "Download AppImage or package",
+          "Make file executable (chmod +x)",
+          "Run directly or install package",
+          "Launch from applications menu"
+        ]
+      }
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "subtitle": "Minimum specifications for optimal performance",
+      "minimum": "Minimum Requirements",
+      "supported": "Supported Databases",
+      "specs": [
+        "RAM: 4GB (8GB recommended)",
+        "Storage: 100MB free space",
+        "CPU: 64-bit processor",
+        "Network: Internet connection for updates"
+      ],
+      "databases": [
+        "InfluxDB 1.8.x and later",
+        "InfluxDB 2.0.x and later",
+        "InfluxDB Cloud",
+        "OSS and Enterprise editions"
+      ]
+    },
+    "support": {
+      "title": "Need Help?",
+      "github": "Source code and issues",
+      "releases": "What's new in v{{version}}",
+      "issues": "Report bugs or get help"
+    }
   },
   "footer": {
     "description": "Professional time-series database management tool",
@@ -145,7 +243,14 @@
     "filterVersions": "Filter versions",
     "searchPlaceholder": "Search in changelog...",
     "showPreReleases": "Show pre-releases",
-    "releaseHighlights": "Release Highlights"
+    "releaseHighlights": "Release Highlights",
+    "versionNavigation": {
+      "title": "Version Navigation",
+      "scrollToVersion": "Jump to version",
+      "currentlyViewing": "Currently viewing",
+      "collapseAll": "Collapse All",
+      "expandAll": "Expand All"
+    }
   },
   "common": {
     "loading": "Loading...",

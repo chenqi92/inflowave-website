@@ -16,6 +16,12 @@
     "version": "版本 {{version}}",
     "platforms": "支持 Windows、macOS 和 Linux"
   },
+  "cta": {
+    "title": "准备开始了吗？",
+    "subtitle": "立即下载 InfloWave，体验最直观的时序数据库管理方式。",
+    "downloadButton": "立即下载",
+    "learnMore": "了解更多"
+  },
   "features": {
     "title": "核心特性",
     "subtitle": "专业时序数据库管理所需的一切功能",
@@ -50,6 +56,46 @@
     "performance": {
       "title": "高性能",
       "description": "采用 Rust 后端构建，具备最佳性能和内存效率。"
+    },
+    "technicalSpecs": {
+      "title": "技术规格",
+      "subtitle": "详细的技术信息和系统架构",
+      "architecture": {
+        "title": "架构",
+        "items": [
+          "前端：React 18 + TypeScript",
+          "后端：Rust + Tauri 框架",
+          "UI 框架：Shadcn/ui + Tailwind CSS",
+          "状态管理：Context API + Hooks"
+        ]
+      },
+      "compatibility": {
+        "title": "兼容性",
+        "items": [
+          "InfluxDB 1.8.x 及更高版本",
+          "InfluxDB 2.0.x 支持 Flux 查询",
+          "InfluxDB Cloud 集成",
+          "跨平台：Windows、macOS、Linux"
+        ]
+      },
+      "security": {
+        "title": "安全特性",
+        "items": [
+          "TLS/SSL 加密连接",
+          "基于令牌的身份验证",
+          "本地凭证存储",
+          "基于角色的访问控制"
+        ]
+      },
+      "performance": {
+        "title": "性能指标",
+        "items": [
+          "内存使用：典型 <100MB",
+          "启动时间：<3 秒",
+          "查询响应：平均 <1 秒",
+          "并发连接：最多 10 个"
+        ]
+      }
     }
   },
   "screenshots": {
@@ -108,7 +154,59 @@
     "refreshReleaseInfo": "刷新发布信息",
     "loadingReleaseInfo": "加载发布信息中...",
     "failedToLoad": "加载发布信息失败",
-    "totalDownloads": "总下载量 {{count}}"
+    "totalDownloads": "总下载量 {{count}}",
+    "installation": {
+      "title": "安装指南",
+      "subtitle": "各平台的快速设置指南",
+      "windows": {
+        "steps": [
+          "下载 .msi 安装程序",
+          "以管理员权限运行安装程序",
+          "按照安装向导操作",
+          "从开始菜单启动 InfloWave"
+        ]
+      },
+      "macos": {
+        "steps": [
+          "下载 .dmg 文件",
+          "打开 .dmg 文件",
+          "将 InfloWave 拖拽到应用程序文件夹",
+          "从启动台或应用程序启动"
+        ]
+      },
+      "linux": {
+        "steps": [
+          "下载 AppImage 或软件包",
+          "设置文件为可执行 (chmod +x)",
+          "直接运行或安装软件包",
+          "从应用程序菜单启动"
+        ]
+      }
+    },
+    "requirements": {
+      "title": "系统要求",
+      "subtitle": "获得最佳性能的最低规格要求",
+      "minimum": "最低要求",
+      "supported": "支持的数据库",
+      "specs": [
+        "内存：4GB（推荐 8GB）",
+        "存储空间：100MB 可用空间",
+        "处理器：64 位处理器",
+        "网络：用于更新的互联网连接"
+      ],
+      "databases": [
+        "InfluxDB 1.8.x 及更高版本",
+        "InfluxDB 2.0.x 及更高版本",
+        "InfluxDB Cloud",
+        "开源版和企业版"
+      ]
+    },
+    "support": {
+      "title": "需要帮助？",
+      "github": "源代码和问题反馈",
+      "releases": "v{{version}} 版本新特性",
+      "issues": "报告错误或获取帮助"
+    }
   },
   "footer": {
     "description": "专业的时序数据库管理工具",
@@ -145,7 +243,14 @@
     "filterVersions": "筛选版本",
     "searchPlaceholder": "在更新日志中搜索...",
     "showPreReleases": "显示预发布版本",
-    "releaseHighlights": "发版亮点"
+    "releaseHighlights": "发版亮点",
+    "versionNavigation": {
+      "title": "版本导航",
+      "scrollToVersion": "跳转到版本",
+      "currentlyViewing": "当前查看",
+      "collapseAll": "全部折叠",
+      "expandAll": "全部展开"
+    }
   },
   "common": {
     "loading": "加载中...",

@@ -241,10 +241,10 @@ const Features = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Technical Specifications
+              {t('features.technicalSpecs.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
-              Built with modern technologies for optimal performance
+              {t('features.technicalSpecs.subtitle')}
             </p>
           </motion.div>
 
@@ -257,28 +257,20 @@ const Features = () => {
           >
             {[
               {
-                title: 'Frontend',
-                items: ['React 18', 'TypeScript', 'Tailwind CSS', 'Framer Motion']
+                title: t('features.technicalSpecs.architecture.title'),
+                items: (t('features.technicalSpecs.architecture.items', { returnObjects: true }) as unknown) as string[]
               },
               {
-                title: 'Backend',
-                items: ['Rust', 'Tauri Framework', 'SQLite', 'Native APIs']
+                title: t('features.technicalSpecs.compatibility.title'),
+                items: (t('features.technicalSpecs.compatibility.items', { returnObjects: true }) as unknown) as string[]
               },
               {
-                title: 'Visualization',
-                items: ['ECharts', 'Custom Charts', 'Real-time Updates', 'Export Features']
+                title: t('features.technicalSpecs.security.title'),
+                items: (t('features.technicalSpecs.security.items', { returnObjects: true }) as unknown) as string[]
               },
               {
-                title: 'Database Support',
-                items: ['InfluxDB 1.x', 'InfluxDB 2.x', 'InfluxQL', 'Flux Queries']
-              },
-              {
-                title: 'Security',
-                items: ['TLS/SSL', 'Token Authentication', 'Local Encryption', 'Audit Logs']
-              },
-              {
-                title: 'Platforms',
-                items: ['Windows 10+', 'macOS 10.15+', 'Linux Ubuntu 18.04+', 'Cross-platform']
+                title: t('features.technicalSpecs.performance.title'),
+                items: (t('features.technicalSpecs.performance.items', { returnObjects: true }) as unknown) as string[]
               }
             ].map((spec, index) => (
               <div

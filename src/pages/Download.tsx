@@ -430,10 +430,10 @@ const DownloadPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Installation Instructions
+              {t('download.installation.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
-              Quick setup guide for each platform
+              {t('download.installation.subtitle')}
             </p>
           </motion.div>
 
@@ -448,32 +448,17 @@ const DownloadPage = () => {
               {
                 platform: 'Windows',
                 icon: AppWindow,
-                steps: [
-                  'Download the .msi installer',
-                  'Run the installer as administrator',
-                  'Follow the installation wizard',
-                  'Launch InfloWave from Start Menu'
-                ]
+                steps: (t('download.installation.windows.steps', { returnObjects: true }) as unknown) as string[]
               },
               {
                 platform: 'macOS',
                 icon: Apple,
-                steps: [
-                  'Download the .dmg file',
-                  'Open the .dmg file',
-                  'Drag InfloWave to Applications',
-                  'Launch from Launchpad or Applications'
-                ]
+                steps: (t('download.installation.macos.steps', { returnObjects: true }) as unknown) as string[]
               },
               {
                 platform: 'Linux',
                 icon: Monitor,
-                steps: [
-                  'Download AppImage or package',
-                  'Make file executable (chmod +x)',
-                  'Run directly or install package',
-                  'Launch from applications menu'
-                ]
+                steps: (t('download.installation.linux.steps', { returnObjects: true }) as unknown) as string[]
               }
             ].map((guide, index) => {
               const Icon = guide.icon
@@ -520,10 +505,10 @@ const DownloadPage = () => {
           >
             <Shield className="w-12 h-12 text-primary-600 mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              System Requirements
+              {t('download.requirements.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
-              Minimum specifications for optimal performance
+              {t('download.requirements.subtitle')}
             </p>
           </motion.div>
 
@@ -537,15 +522,10 @@ const DownloadPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Minimum Requirements
+                  {t('download.requirements.minimum')}
                 </h3>
                 <ul className="space-y-2">
-                  {[
-                    'RAM: 4GB (8GB recommended)',
-                    'Storage: 100MB free space',
-                    'CPU: 64-bit processor',
-                    'Network: Internet connection for updates'
-                  ].map((req, index) => (
+                  {((t('download.requirements.specs', { returnObjects: true }) as unknown) as string[]).map((req, index) => (
                     <li key={index} className="flex items-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
                       <span className="text-gray-700 dark:text-gray-300 text-sm">{req}</span>
@@ -556,15 +536,10 @@ const DownloadPage = () => {
               
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Supported Databases
+                  {t('download.requirements.supported')}
                 </h3>
                 <ul className="space-y-2">
-                  {[
-                    'InfluxDB 1.8.x and later',
-                    'InfluxDB 2.0.x and later',
-                    'InfluxDB Cloud',
-                    'OSS and Enterprise editions'
-                  ].map((db, index) => (
+                  {((t('download.requirements.databases', { returnObjects: true }) as unknown) as string[]).map((db, index) => (
                     <li key={index} className="flex items-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
                       <span className="text-gray-700 dark:text-gray-300 text-sm">{db}</span>
@@ -587,7 +562,7 @@ const DownloadPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8">
-              Need Help?
+              {t('download.support.title')}
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -602,7 +577,7 @@ const DownloadPage = () => {
                   {t('nav.github')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Source code and issues
+                  {t('download.support.github')}
                 </p>
               </a>
               
@@ -617,7 +592,7 @@ const DownloadPage = () => {
                   {t('download.releaseNotes')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  What's new in v{release?.version || '0.1.5'}
+                  {t('download.support.releases', { version: release?.version || '0.1.5' })}
                 </p>
               </a>
               
@@ -629,10 +604,10 @@ const DownloadPage = () => {
               >
                 <ExternalLink className="w-8 h-8 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 mx-auto mb-3 transition-colors duration-200" />
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Get Support
+                  {t('footer.links.support')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Report bugs or get help
+                  {t('download.support.issues')}
                 </p>
               </a>
             </div>
