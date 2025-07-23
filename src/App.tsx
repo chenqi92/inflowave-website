@@ -11,6 +11,7 @@ import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Features from './pages/Features'
 import Download from './pages/Download'
+import Changelog from './pages/Changelog'
 import NotFound from './pages/NotFound'
 
 // Providers
@@ -36,6 +37,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/features" element={<Features />} />
               <Route path="/download" element={<Download />} />
+              <Route path="/changelog" element={<Changelog />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </motion.main>

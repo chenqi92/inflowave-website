@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { 
   Download,
   AppWindow,
@@ -13,15 +14,35 @@ import {
   Github,
   RefreshCw,
   AlertCircle,
-  Loader2
+  Loader2,
+  Star,
+  Smartphone
 } from 'lucide-react'
 import { useLanguage } from '../providers/LanguageProvider'
 import { useRelease } from '../hooks/useRelease'
+import MarkdownRenderer from '../components/MarkdownRenderer'
+import { detectDevice, getBestDownloadRecommendation, getDeviceDescription, type DeviceInfo } from '../utils/deviceDetection'
 import type { ParsedDownload } from '../services/githubApi'
 
 const DownloadPage = () => {
   const { t } = useLanguage()
   const { release, loading, error, downloadStats, refetch } = useRelease()
+  const [userDevice, setUserDevice] = useState<DeviceInfo | null>(null)
+  const [recommendedDownload, setRecommendedDownload] = useState<ParsedDownload | null>(null)
+
+  // Detect user device on component mount
+  useEffect(() => {
+    const device = detectDevice()
+    setUserDevice(device)
+  }, [])
+
+  // Update recommended download when release data changes
+  useEffect(() => {
+    if (release && userDevice) {
+      const recommended = getBestDownloadRecommendation(userDevice, release.downloads)
+      setRecommendedDownload(recommended)
+    }
+  }, [release, userDevice])
 
   // Group downloads by platform
   const groupDownloadsByPlatform = (downloads: ParsedDownload[]) => {
@@ -96,7 +117,7 @@ const DownloadPage = () => {
       <div className="min-h-screen pt-16 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin text-primary-600 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-300">Loading release information...</p>
+          <p className="text-gray-600 dark:text-gray-300">{t('download.loadingReleaseInfo')}</p>
         </div>
       </div>
     )
@@ -109,7 +130,7 @@ const DownloadPage = () => {
         <div className="text-center max-w-md">
           <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            Failed to Load Release Information
+            {t('download.failedToLoad')}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">{error}</p>
           <button
@@ -117,7 +138,7 @@ const DownloadPage = () => {
             className="btn-primary flex items-center space-x-2 mx-auto"
           >
             <RefreshCw className="w-4 h-4" />
-            <span>Retry</span>
+            <span>{t('common.retry')}</span>
           </button>
         </div>
       </div>
@@ -159,7 +180,7 @@ const DownloadPage = () => {
                   <div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
                   <div className="flex items-center space-x-2">
                     <FileDown className="w-4 h-4" />
-                    <span>{downloadStats.totalDownloads.toLocaleString()} total downloads</span>
+                    <span>{t('download.totalDownloads', { count: downloadStats.totalDownloads.toLocaleString() })}</span>
                   </div>
                 </>
               )}
@@ -174,13 +195,74 @@ const DownloadPage = () => {
                   className="inline-flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
                 >
                   <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                  <span>Refresh release info</span>
+                  <span>{t('download.refreshReleaseInfo')}</span>
                 </button>
               </div>
             )}
           </motion.div>
         </div>
       </section>
+
+      {/* Smart Download Recommendation */}
+      {userDevice && recommendedDownload && (
+        <section className="py-12 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border-2 border-primary-200 dark:border-primary-700"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                    <Smartphone className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {t('download.deviceDetection.recommended')}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {t('download.deviceDetection.detected', { device: getDeviceDescription(userDevice) })}
+                    </p>
+                  </div>
+                </div>
+                <Star className="w-6 h-6 text-yellow-500" />
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center">
+                    {userDevice.os === 'windows' && <AppWindow className="w-6 h-6 text-white" />}
+                    {userDevice.os === 'macos' && <Apple className="w-6 h-6 text-white" />}
+                    {userDevice.os === 'linux' && <Monitor className="w-6 h-6 text-white" />}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      {getDownloadTypeLabel(recommendedDownload)}
+                    </h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {recommendedDownload.size}
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={recommendedDownload.url}
+                  className="btn-primary flex items-center space-x-2 hover-lift"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>{t('download.deviceDetection.downloadRecommended')}</span>
+                </a>
+              </div>
+
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+                {t('download.deviceDetection.manualSelect')}
+              </p>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Platform Downloads */}
       <section className="py-20 bg-white dark:bg-gray-900">
@@ -189,10 +271,10 @@ const DownloadPage = () => {
             <div className="text-center py-12">
               <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                No Downloads Available
+                {t('download.noDownloads')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Downloads are being prepared. Please check back later or visit GitHub.
+                {t('download.noDownloadsDescription')}
               </p>
               <a
                 href={release?.htmlUrl || `https://github.com/chenqi92/inflowave/releases`}
@@ -201,7 +283,7 @@ const DownloadPage = () => {
                 className="btn-outline flex items-center space-x-2 mx-auto"
               >
                 <Github className="w-4 h-4" />
-                <span>View on GitHub</span>
+                <span>{t('download.viewOnGithub')}</span>
               </a>
             </div>
           ) : (
@@ -320,11 +402,7 @@ const DownloadPage = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-8"
             >
-              <div className="prose prose-gray dark:prose-invert max-w-none">
-                <pre className="whitespace-pre-wrap text-sm leading-relaxed">
-                  {release.releaseNotes}
-                </pre>
-              </div>
+              <MarkdownRenderer content={release.releaseNotes} />
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-600">
                 <a
                   href={release.htmlUrl}

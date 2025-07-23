@@ -33,6 +33,7 @@ const Navbar = () => {
     { href: '/', label: t('nav.home') },
     { href: '/features', label: t('nav.features') },
     { href: '/download', label: t('nav.download') },
+    { href: '/changelog', label: t('nav.changelog') },
   ]
 
   const themeIcon = {

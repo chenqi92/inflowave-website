@@ -3,6 +3,7 @@
     "home": "Home",
     "features": "Features",
     "download": "Download",
+    "changelog": "Changelog",
     "docs": "Documentation",
     "github": "GitHub"
   },
@@ -68,6 +69,12 @@
     "subtitle": "Choose the right version for your operating system",
     "currentVersion": "Current Version: {{version}}",
     "releaseDate": "Released: {{date}}",
+    "deviceDetection": {
+      "detected": "Detected: {{device}}",
+      "recommended": "Recommended for your system",
+      "downloadRecommended": "Download (Recommended)",
+      "manualSelect": "Or choose manually below"
+    },
     "platforms": {
       "windows": {
         "title": "Windows",
@@ -94,7 +101,14 @@
     },
     "installationGuide": "Installation Guide",
     "systemRequirements": "System Requirements",
-    "releaseNotes": "Release Notes"
+    "releaseNotes": "Release Notes",
+    "noDownloads": "No Downloads Available",
+    "noDownloadsDescription": "Downloads are being prepared. Please check back later or visit GitHub.",
+    "viewOnGithub": "View on GitHub",
+    "refreshReleaseInfo": "Refresh release info",
+    "loadingReleaseInfo": "Loading release information...",
+    "failedToLoad": "Failed to Load Release Information",
+    "totalDownloads": "{{count}} total downloads"
   },
   "footer": {
     "description": "Professional time-series database management tool",
@@ -113,6 +127,25 @@
     },
     "copyright": "© {{year}} InfloWave. All rights reserved.",
     "license": "Licensed under MIT License"
+  },
+  "changelog": {
+    "title": "Changelog",
+    "subtitle": "Track the evolution of InfloWave with detailed release notes",
+    "allVersions": "All Versions",
+    "latestVersion": "Latest Version",
+    "version": "Version {{version}}",
+    "released": "Released {{date}}",
+    "downloads": "{{count}} downloads",
+    "viewOnGithub": "View on GitHub",
+    "noChangelog": "No changelog available",
+    "loading": "Loading changelog...",
+    "error": "Failed to load changelog",
+    "prerelease": "Pre-release",
+    "draft": "Draft",
+    "filterVersions": "Filter versions",
+    "searchPlaceholder": "Search in changelog...",
+    "showPreReleases": "Show pre-releases",
+    "releaseHighlights": "Release Highlights"
   },
   "common": {
     "loading": "Loading...",

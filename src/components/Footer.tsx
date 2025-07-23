@@ -10,7 +10,8 @@ const Footer = () => {
     product: [
       { label: t('footer.links.home'), href: '/' },
       { label: t('footer.links.features'), href: '/features' },
-      { label: t('footer.links.download'), href: '/download' }
+      { label: t('footer.links.download'), href: '/download' },
+      { label: t('nav.changelog'), href: '/changelog' }
     ],
     resources: [
       { 

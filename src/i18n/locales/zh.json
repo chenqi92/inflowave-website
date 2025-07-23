@@ -3,6 +3,7 @@
     "home": "首页",
     "features": "功能特性",
     "download": "下载",
+    "changelog": "更新日志",
     "docs": "文档",
     "github": "GitHub"
   },
@@ -68,6 +69,12 @@
     "subtitle": "为您的操作系统选择合适的版本",
     "currentVersion": "当前版本：{{version}}",
     "releaseDate": "发布日期：{{date}}",
+    "deviceDetection": {
+      "detected": "检测到：{{device}}",
+      "recommended": "为您的系统推荐",
+      "downloadRecommended": "下载（推荐）",
+      "manualSelect": "或在下方手动选择"
+    },
     "platforms": {
       "windows": {
         "title": "Windows",
@@ -94,7 +101,14 @@
     },
     "installationGuide": "安装指南",
     "systemRequirements": "系统要求",
-    "releaseNotes": "发布说明"
+    "releaseNotes": "发布说明",
+    "noDownloads": "暂无下载文件",
+    "noDownloadsDescription": "下载文件正在准备中，请稍后再试或访问 GitHub。",
+    "viewOnGithub": "在 GitHub 上查看",
+    "refreshReleaseInfo": "刷新发布信息",
+    "loadingReleaseInfo": "加载发布信息中...",
+    "failedToLoad": "加载发布信息失败",
+    "totalDownloads": "总下载量 {{count}}"
   },
   "footer": {
     "description": "专业的时序数据库管理工具",
@@ -113,6 +127,25 @@
     },
     "copyright": "© {{year}} InfloWave。保留所有权利。",
     "license": "基于 MIT 许可证授权"
+  },
+  "changelog": {
+    "title": "更新日志",
+    "subtitle": "跟踪 InfloWave 的发展历程和详细发布说明",
+    "allVersions": "所有版本",
+    "latestVersion": "最新版本",
+    "version": "版本 {{version}}",
+    "released": "发布于 {{date}}",
+    "downloads": "{{count}} 次下载",
+    "viewOnGithub": "在 GitHub 查看",
+    "noChangelog": "暂无更新日志",
+    "loading": "加载更新日志中...",
+    "error": "加载更新日志失败",
+    "prerelease": "预发布版本",
+    "draft": "草稿",
+    "filterVersions": "筛选版本",
+    "searchPlaceholder": "在更新日志中搜索...",
+    "showPreReleases": "显示预发布版本",
+    "releaseHighlights": "发版亮点"
   },
   "common": {
     "loading": "加载中...",
