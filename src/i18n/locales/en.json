@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "download": "Download",
+    "docs": "Documentation",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "Modern Time-Series Database Management Tool",
+    "subtitle": "Professional InfluxDB GUI client built with Tauri + React + TypeScript + Rust",
+    "description": "InfloWave provides an intuitive graphical interface for managing InfluxDB databases with high performance, security, and cross-platform support.",
+    "downloadButton": "Download Now",
+    "viewOnGithub": "View on GitHub",
+    "version": "Version {{version}}",
+    "platforms": "Available for Windows, macOS & Linux"
+  },
+  "features": {
+    "title": "Core Features",
+    "subtitle": "Everything you need for professional time-series database management",
+    "multiConnection": {
+      "title": "Multi-Connection Management",
+      "description": "Manage multiple InfluxDB instances simultaneously with intelligent connection pooling and status monitoring."
+    },
+    "visualQuery": {
+      "title": "Visual Query Editor",
+      "description": "Professional InfluxQL query editor with syntax highlighting, auto-completion, and result visualization."
+    },
+    "charts": {
+      "title": "Advanced Charts",
+      "description": "Multiple chart types for time-series data analysis including line charts, bar charts, and custom visualizations."
+    },
+    "dataImportExport": {
+      "title": "Data Import/Export",
+      "description": "Support for CSV, JSON, Excel and other formats with batch processing capabilities."
+    },
+    "modernUI": {
+      "title": "Modern Interface",
+      "description": "Beautiful and intuitive interface built with Shadcn/ui components and responsive design."
+    },
+    "crossPlatform": {
+      "title": "Cross-Platform",
+      "description": "Native desktop applications for Windows, macOS, and Linux with consistent user experience."
+    },
+    "security": {
+      "title": "Secure & Reliable",
+      "description": "Local data storage with encrypted connections and comprehensive error handling."
+    },
+    "performance": {
+      "title": "High Performance",
+      "description": "Built with Rust backend for optimal performance and memory efficiency."
+    }
+  },
+  "screenshots": {
+    "title": "Screenshots",
+    "subtitle": "See InfloWave in action",
+    "gallery": {
+      "dashboard": "Dashboard Overview",
+      "queryEditor": "Query Editor",
+      "dataVisualization": "Data Visualization",
+      "connectionManager": "Connection Manager",
+      "dataImport": "Data Import/Export",
+      "settings": "Settings & Configuration"
+    }
+  },
+  "download": {
+    "title": "Download InfloWave",
+    "subtitle": "Choose the right version for your operating system",
+    "currentVersion": "Current Version: {{version}}",
+    "releaseDate": "Released: {{date}}",
+    "platforms": {
+      "windows": {
+        "title": "Windows",
+        "description": "For Windows 10/11 (64-bit)",
+        "installer": "Windows Installer (.msi)",
+        "portable": "Portable Version (.exe)",
+        "requirements": "Windows 10 version 1903 or later"
+      },
+      "macos": {
+        "title": "macOS",
+        "description": "For macOS 10.15 or later",
+        "intel": "Intel Processor (.dmg)",
+        "apple": "Apple Silicon (.dmg)",
+        "requirements": "macOS Catalina 10.15 or later"
+      },
+      "linux": {
+        "title": "Linux",
+        "description": "For modern Linux distributions",
+        "appimage": "AppImage (Universal)",
+        "deb": "Debian Package (.deb)",
+        "rpm": "RPM Package (.rpm)",
+        "requirements": "Ubuntu 18.04+ / Debian 10+ / CentOS 8+"
+      }
+    },
+    "installationGuide": "Installation Guide",
+    "systemRequirements": "System Requirements",
+    "releaseNotes": "Release Notes"
+  },
+  "footer": {
+    "description": "Professional time-series database management tool",
+    "links": {
+      "product": "Product",
+      "home": "Home",
+      "features": "Features",
+      "download": "Download",
+      "resources": "Resources",
+      "documentation": "Documentation",
+      "github": "GitHub Repository",
+      "issues": "Report Issues",
+      "community": "Community",
+      "discussions": "Discussions",
+      "support": "Support"
+    },
+    "copyright": "© {{year}} InfloWave. All rights reserved.",
+    "license": "Licensed under MIT License"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "openSource": "Open Source",
+    "free": "Free",
+    "crossPlatform": "Cross Platform"
+  }
+}

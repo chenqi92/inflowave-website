@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "home": "首页",
+    "features": "功能特性",
+    "download": "下载",
+    "docs": "文档",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "现代化的时序数据库管理工具",
+    "subtitle": "基于 Tauri + React + TypeScript + Rust 构建的专业 InfluxDB GUI 客户端",
+    "description": "InfloWave 为 InfluxDB 数据库管理提供直观的图形界面，具有高性能、安全可靠和跨平台支持的特点。",
+    "downloadButton": "立即下载",
+    "viewOnGithub": "查看 GitHub",
+    "version": "版本 {{version}}",
+    "platforms": "支持 Windows、macOS 和 Linux"
+  },
+  "features": {
+    "title": "核心特性",
+    "subtitle": "专业时序数据库管理所需的一切功能",
+    "multiConnection": {
+      "title": "多连接管理",
+      "description": "同时管理多个 InfluxDB 实例，具备智能连接池和状态监控功能。"
+    },
+    "visualQuery": {
+      "title": "可视化查询编辑器",
+      "description": "专业的 InfluxQL 查询编辑器，支持语法高亮、自动补全和结果可视化。"
+    },
+    "charts": {
+      "title": "高级图表",
+      "description": "多种图表类型支持时序数据分析，包括折线图、柱状图和自定义可视化。"
+    },
+    "dataImportExport": {
+      "title": "数据导入导出",
+      "description": "支持 CSV、JSON、Excel 等多种格式，具备批量处理能力。"
+    },
+    "modernUI": {
+      "title": "现代化界面",
+      "description": "基于 Shadcn/ui 组件构建的美观直观界面，支持响应式设计。"
+    },
+    "crossPlatform": {
+      "title": "跨平台支持",
+      "description": "为 Windows、macOS 和 Linux 提供原生桌面应用，用户体验一致。"
+    },
+    "security": {
+      "title": "安全可靠",
+      "description": "本地数据存储，加密连接和全面的错误处理机制。"
+    },
+    "performance": {
+      "title": "高性能",
+      "description": "采用 Rust 后端构建，具备最佳性能和内存效率。"
+    }
+  },
+  "screenshots": {
+    "title": "软件截图",
+    "subtitle": "查看 InfloWave 的实际效果",
+    "gallery": {
+      "dashboard": "仪表盘概览",
+      "queryEditor": "查询编辑器",
+      "dataVisualization": "数据可视化",
+      "connectionManager": "连接管理器",
+      "dataImport": "数据导入导出",
+      "settings": "设置和配置"
+    }
+  },
+  "download": {
+    "title": "下载 InfloWave",
+    "subtitle": "为您的操作系统选择合适的版本",
+    "currentVersion": "当前版本：{{version}}",
+    "releaseDate": "发布日期：{{date}}",
+    "platforms": {
+      "windows": {
+        "title": "Windows",
+        "description": "适用于 Windows 10/11 (64位)",
+        "installer": "Windows 安装程序 (.msi)",
+        "portable": "便携版本 (.exe)",
+        "requirements": "Windows 10 版本 1903 或更高"
+      },
+      "macos": {
+        "title": "macOS",
+        "description": "适用于 macOS 10.15 或更高版本",
+        "intel": "Intel 处理器 (.dmg)",
+        "apple": "Apple Silicon (.dmg)",
+        "requirements": "macOS Catalina 10.15 或更高版本"
+      },
+      "linux": {
+        "title": "Linux",
+        "description": "适用于现代 Linux 发行版",
+        "appimage": "AppImage (通用)",
+        "deb": "Debian 软件包 (.deb)",
+        "rpm": "RPM 软件包 (.rpm)",
+        "requirements": "Ubuntu 18.04+ / Debian 10+ / CentOS 8+"
+      }
+    },
+    "installationGuide": "安装指南",
+    "systemRequirements": "系统要求",
+    "releaseNotes": "发布说明"
+  },
+  "footer": {
+    "description": "专业的时序数据库管理工具",
+    "links": {
+      "product": "产品",
+      "home": "首页",
+      "features": "功能特性",
+      "download": "下载",
+      "resources": "资源",
+      "documentation": "文档",
+      "github": "GitHub 仓库",
+      "issues": "问题反馈",
+      "community": "社区",
+      "discussions": "讨论",
+      "support": "支持"
+    },
+    "copyright": "© {{year}} InfloWave。保留所有权利。",
+    "license": "基于 MIT 许可证授权"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "retry": "重试",
+    "close": "关闭",
+    "openSource": "开源",
+    "free": "免费",
+    "crossPlatform": "跨平台"
+  }
+}
