@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react'
 import { useLanguage } from '../providers/LanguageProvider'
+import { screenshots } from '../data/screenshots'
 
 const Features = () => {
   const { t } = useLanguage()
@@ -206,17 +207,46 @@ const Features = () => {
                   {/* Feature Visual */}
                   <div className="flex-1">
                     <div className="relative">
-                      <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-xl flex items-center justify-center">
-                        <div className="text-center">
-                          <Icon className={`w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4`} />
-                          <p className="text-gray-500 dark:text-gray-400 font-medium">
-                            {feature.title} Screenshot
-                          </p>
-                          <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
-                            Upload feature screenshot here
-                          </p>
-                        </div>
-                      </div>
+                      {(() => {
+                        // Map features to their corresponding screenshots
+                        const screenshotMap: { [key: string]: string } = {
+                          'Multi-Database Connection': 'multi-connection',
+                          'Visual Query Editor': 'query-editor', 
+                          'Advanced Charts': 'advanced-charts',
+                          'Data Import/Export': 'data-import-export',
+                          'Modern Interface': 'modern-ui',
+                          'Cross-Platform': 'cross-platform',
+                          'Security & Reliability': 'security-reliable',
+                          'High Performance': 'high-performance'
+                        }
+                        
+                        const screenshotId = screenshotMap[feature.title] || screenshotMap[Object.keys(screenshotMap).find(key => feature.title.includes(key.split(' ')[0])) || '']
+                        const screenshot = screenshots.find(s => s.id === screenshotId)
+                        
+                        if (screenshot) {
+                          return (
+                            <div className="aspect-video overflow-hidden rounded-2xl shadow-xl group">
+                              <img
+                                src={`/screenshots/${screenshot.filename}`}
+                                alt={screenshot.title.en}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                loading="lazy"
+                              />
+                            </div>
+                          )
+                        }
+                        
+                        return (
+                          <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-xl flex items-center justify-center">
+                            <div className="text-center">
+                              <Icon className={`w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4`} />
+                              <p className="text-gray-500 dark:text-gray-400 font-medium">
+                                {feature.title}
+                              </p>
+                            </div>
+                          </div>
+                        )
+                      })()}
                       
                       {/* Decorative elements */}
                       <div className={`absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br ${feature.color} rounded-full opacity-20`}></div>

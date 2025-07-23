@@ -17,10 +17,12 @@ import {
 } from 'lucide-react'
 import { useLanguage } from '../providers/LanguageProvider'
 import { useLatestVersion } from '../hooks/useRelease'
+import { getFeaturedScreenshots } from '../data/screenshots'
 
 const Home = () => {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const { version, loading: versionLoading } = useLatestVersion()
+  const featuredScreenshots = getFeaturedScreenshots()
 
   const features = [
     {
@@ -281,28 +283,29 @@ const Home = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
+            {featuredScreenshots.map((screenshot, index) => (
+              <motion.div
+                key={screenshot.id}
+                variants={itemVariants}
                 className="group relative bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden hover-lift"
               >
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
-                  <div className="text-center">
-                    <Play className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Screenshot placeholder
-                    </p>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                      Upload your screenshots here
-                    </p>
-                  </div>
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={`/screenshots/${screenshot.filename}`}
+                    alt={screenshot.title.en}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white">
-                    Screenshot {index + 1}
+                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">
+                    {language === 'zh' ? screenshot.title.zh : screenshot.title.en}
                   </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {language === 'zh' ? screenshot.description.zh : screenshot.description.en}
+                  </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
