@@ -292,7 +292,7 @@ const DownloadPage = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+              className="space-y-12"
             >
               {Object.entries(platformConfig).map(([platformKey, platform]) => {
                 const Icon = platform.icon
@@ -305,68 +305,94 @@ const DownloadPage = () => {
                   <motion.div
                     key={platformKey}
                     variants={itemVariants}
-                    className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover-lift"
+                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
                   >
                     {/* Platform Header */}
-                    <div className="text-center mb-8">
-                      <div className={`w-16 h-16 bg-gradient-to-br ${platform.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                        <Icon className="w-8 h-8 text-white" />
+                    <div className={`relative px-8 py-6 bg-gradient-to-r ${platform.color} text-white`}>
+                      <div className="flex items-center space-x-4">
+                        <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                          <Icon className="w-7 h-7 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold mb-1">
+                            {platform.name}
+                          </h3>
+                          <p className="text-white/90 mb-1">
+                            {platform.description}
+                          </p>
+                          <p className="text-sm text-white/75">
+                            {platform.requirements}
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                        {platform.name}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-2">
-                        {platform.description}
-                      </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {platform.requirements}
-                      </p>
+                      {/* Decorative Elements */}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+                      <div className="absolute bottom-0 right-8 w-20 h-20 bg-white/5 rounded-full translate-y-10"></div>
                     </div>
 
                     {/* Download Options */}
-                    <div className="space-y-4">
-                      {downloads.map((download, downloadIndex) => (
-                        <div
-                          key={downloadIndex}
-                          className={`relative p-4 border-2 rounded-lg transition-all duration-200 ${
-                            download.recommended
-                              ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
-                              : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                          }`}
-                        >
-                          {download.recommended && (
-                            <div className="absolute -top-2 -right-2">
-                              <span className="bg-primary-500 text-white text-xs px-2 py-1 rounded-full">
-                                Recommended
-                              </span>
-                            </div>
-                          )}
-                          
-                          <div className="flex items-center justify-between mb-3">
-                            <div>
-                              <h4 className="font-semibold text-gray-900 dark:text-white">
-                                {getDownloadTypeLabel(download)}
-                              </h4>
-                              <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {download.size}
-                              </p>
-                            </div>
-                            <FileDown className="w-5 h-5 text-gray-400" />
-                          </div>
-                          
-                          <a
-                            href={download.url}
-                            className={`w-full flex items-center justify-center space-x-2 py-2 px-4 rounded-lg font-medium transition-colors duration-200 ${
+                    <div className="p-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {downloads.map((download, downloadIndex) => (
+                          <div
+                            key={downloadIndex}
+                            className={`group relative p-5 rounded-xl border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
                               download.recommended
-                                ? 'bg-primary-600 hover:bg-primary-700 text-white'
-                                : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white'
+                                ? 'border-primary-200 bg-primary-50 dark:bg-primary-900/20 dark:border-primary-700'
+                                : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-750 hover:border-gray-300 dark:hover:border-gray-500'
                             }`}
                           >
-                            <Download className="w-4 h-4" />
-                            <span>Download</span>
-                          </a>
-                        </div>
-                      ))}
+                            {download.recommended && (
+                              <div className="absolute -top-3 -right-3">
+                                <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg flex items-center space-x-1">
+                                  <Star className="w-3 h-3" />
+                                  <span>{t('download.deviceDetection.recommendedShort')}</span>
+                                </div>
+                              </div>
+                            )}
+                            
+                            <div className="flex items-start space-x-4 mb-4">
+                              <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 ${
+                                download.recommended
+                                  ? 'bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400'
+                                  : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-400 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/40 group-hover:text-primary-600 dark:group-hover:text-primary-400'
+                              }`}>
+                                <Package className="w-6 h-6" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
+                                  {getDownloadTypeLabel(download)}
+                                </h4>
+                                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                                  <span className="flex items-center space-x-1">
+                                    <FileDown className="w-4 h-4" />
+                                    <span>{download.size}</span>
+                                  </span>
+                                  {download.downloadCount && (
+                                    <span className="flex items-center space-x-1">
+                                      <Star className="w-4 h-4" />
+                                      <span>{download.downloadCount.toLocaleString()} downloads</span>
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <a
+                              href={download.url}
+                              className={`w-full flex items-center justify-center space-x-2 py-3 px-4 rounded-lg font-semibold transition-all duration-200 hover-lift ${
+                                download.recommended
+                                  ? 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-lg hover:shadow-xl'
+                                  : 'bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-900 dark:text-white shadow hover:shadow-md'
+                              }`}
+                            >
+                              <Download className="w-5 h-5" />
+                              <span>{t('nav.download')}</span>
+                              <ExternalLink className="w-4 h-4 opacity-70" />
+                            </a>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 )
@@ -376,48 +402,6 @@ const DownloadPage = () => {
         </div>
       </section>
 
-      {/* Release Notes */}
-      {release?.releaseNotes && (
-        <section className="py-20 bg-gray-50 dark:bg-gray-800">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-                {t('download.releaseNotes')}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300">
-                What's new in version {release.version}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-8"
-            >
-              <MarkdownRenderer content={release.releaseNotes} />
-              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-600">
-                <a
-                  href={release.htmlUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
-                >
-                  <span>View full release on GitHub</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
 
       {/* Installation Guide */}
       <section className="py-20 bg-white dark:bg-gray-900">

@@ -96,6 +96,78 @@
           "Concurrent connections: Up to 10"
         ]
       }
+    },
+    "detailedFeatures": {
+      "multiConnection": {
+        "details": [
+          "Simultaneous connections to multiple InfluxDB instances",
+          "Intelligent connection pooling and health monitoring",
+          "Automatic reconnection and failover handling",
+          "Connection status indicators and alerts"
+        ]
+      },
+      "visualQuery": {
+        "details": [
+          "Syntax highlighting for InfluxQL queries",
+          "Smart auto-completion and suggestions",
+          "Query history and bookmarks",
+          "Real-time result visualization"
+        ]
+      },
+      "charts": {
+        "details": [
+          "Line charts, bar charts, and scatter plots",
+          "Interactive data exploration",
+          "Custom chart configurations",
+          "Export charts as images or PDFs"
+        ]
+      },
+      "dataImportExport": {
+        "details": [
+          "Support for CSV, JSON, Excel formats",
+          "Batch data processing capabilities",
+          "Data validation and error handling",
+          "Scheduled import/export operations"
+        ]
+      },
+      "modernUI": {
+        "details": [
+          "Clean and intuitive interface design",
+          "Dark and light theme support",
+          "Responsive layout for all screen sizes",
+          "Customizable workspace layouts"
+        ]
+      },
+      "crossPlatform": {
+        "details": [
+          "Native apps for Windows, macOS, and Linux",
+          "Consistent user experience across platforms",
+          "Platform-specific optimizations",
+          "Automatic updates and notifications"
+        ]
+      },
+      "security": {
+        "details": [
+          "Encrypted connection protocols (TLS/SSL)",
+          "Local credential storage with encryption",
+          "Audit logs and security monitoring",
+          "Role-based access control support"
+        ]
+      },
+      "performance": {
+        "details": [
+          "Built with Rust for optimal performance",
+          "Efficient memory management",
+          "Fast query execution and rendering",
+          "Minimal resource consumption"
+        ]
+      }
+    },
+    "ctaSection": {
+      "title": "Experience the Power of InfloWave",
+      "subtitle": "Try all these features and more in the full version of InfloWave.",
+      "downloadButton": "Download Now",
+      "githubButton": "View on GitHub"
     }
   },
   "screenshots": {
@@ -118,6 +190,7 @@
     "deviceDetection": {
       "detected": "Detected: {{device}}",
       "recommended": "Recommended for your system",
+      "recommendedShort": "Recommended",
       "downloadRecommended": "Download (Recommended)",
       "manualSelect": "Or choose manually below"
     },

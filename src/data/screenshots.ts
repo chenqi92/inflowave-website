@@ -169,6 +169,45 @@ export const screenshots: Screenshot[] = [
       zh: '支持 Windows、macOS 和 Linux 的原生桌面应用'
     },
     category: 'interface'
+  },
+  {
+    id: 'dangerous-operation-lock',
+    filename: '危险操作锁定.png',
+    title: {
+      en: 'Dangerous Operation Protection',
+      zh: '危险操作锁定'
+    },
+    description: {
+      en: 'Safety locks for critical database operations',
+      zh: '对关键数据库操作的安全保护'
+    },
+    category: 'features'
+  },
+  {
+    id: 'large-data-loading',
+    filename: '大数据量流畅加载.png',
+    title: {
+      en: 'Smooth Large Data Loading',
+      zh: '大数据量流畅加载'
+    },
+    description: {
+      en: 'Efficient handling of large datasets with smooth loading',
+      zh: '高效处理大数据集，流畅加载'
+    },
+    category: 'performance'
+  },
+  {
+    id: 'complete-user-guide',
+    filename: '完整用户引导.png',
+    title: {
+      en: 'Complete User Guide',
+      zh: '完整用户引导'
+    },
+    description: {
+      en: 'Comprehensive user guidance and tutorials',
+      zh: '全面的用户指导和教程'
+    },
+    category: 'features'
   }
 ]
 

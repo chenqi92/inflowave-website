@@ -96,6 +96,78 @@
           "并发连接：最多 10 个"
         ]
       }
+    },
+    "detailedFeatures": {
+      "multiConnection": {
+        "details": [
+          "同时连接多个 InfluxDB 实例",
+          "智能连接池和健康监控",
+          "自动重连和故障转移处理",
+          "连接状态指示器和警报"
+        ]
+      },
+      "visualQuery": {
+        "details": [
+          "InfluxQL 查询语法高亮",
+          "智能自动补全和建议",
+          "查询历史和书签管理",
+          "实时结果可视化"
+        ]
+      },
+      "charts": {
+        "details": [
+          "折线图、柱状图和散点图",
+          "交互式数据探索",
+          "自定义图表配置",
+          "导出图表为图像或 PDF"
+        ]
+      },
+      "dataImportExport": {
+        "details": [
+          "支持 CSV、JSON、Excel 格式",
+          "批量数据处理能力",
+          "数据验证和错误处理",
+          "定时导入/导出操作"
+        ]
+      },
+      "modernUI": {
+        "details": [
+          "简洁直观的界面设计",
+          "深色和浅色主题支持",
+          "适配所有屏幕尺寸的响应式布局",
+          "可自定义的工作区布局"
+        ]
+      },
+      "crossPlatform": {
+        "details": [
+          "Windows、macOS 和 Linux 原生应用",
+          "跨平台一致的用户体验",
+          "特定平台优化",
+          "自动更新和通知"
+        ]
+      },
+      "security": {
+        "details": [
+          "加密连接协议 (TLS/SSL)",
+          "加密的本地凭证存储",
+          "审计日志和安全监控",
+          "基于角色的访问控制支持"
+        ]
+      },
+      "performance": {
+        "details": [
+          "使用 Rust 构建以获得最佳性能",
+          "高效的内存管理",
+          "快速查询执行和渲染",
+          "最小资源消耗"
+        ]
+      }
+    },
+    "ctaSection": {
+      "title": "体验 InfloWave 的强大功能",
+      "subtitle": "在完整版的 InfloWave 中尝试所有这些功能以及更多特性。",
+      "downloadButton": "立即下载",
+      "githubButton": "查看 GitHub"
     }
   },
   "screenshots": {
@@ -118,6 +190,7 @@
     "deviceDetection": {
       "detected": "检测到：{{device}}",
       "recommended": "为您的系统推荐",
+      "recommendedShort": "推荐",
       "downloadRecommended": "下载（推荐）",
       "manualSelect": "或在下方手动选择"
     },

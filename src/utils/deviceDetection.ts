@@ -35,13 +35,75 @@ export function detectDevice(): DeviceInfo {
     // Assume 64-bit for modern Windows if not explicitly 32-bit
     arch = 'x64'
   } else if (os === 'macos') {
-    // For macOS, check for Apple Silicon indicators
-    if (userAgent.includes('apple') && (userAgent.includes('arm') || userAgent.includes('silicon'))) {
+    // For macOS, detect Apple Silicon vs Intel
+    try {
+      // Method 1: Check navigator.platform
+      if (navigator.platform) {
+        const platform = navigator.platform.toLowerCase()
+        if (platform.includes('arm') || platform.includes('aarch64')) {
+          arch = 'arm64'
+        } else if (platform.includes('intel') || platform.includes('x86')) {
+          arch = 'x64'
+        }
+      }
+      
+      // Method 2: Use WebGL renderer info as fallback
+      if (arch === 'unknown') {
+        try {
+          const canvas = document.createElement('canvas')
+          const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+          if (gl) {
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+            if (debugInfo) {
+              const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_GL).toLowerCase()
+              if (renderer.includes('apple') && (renderer.includes('m1') || renderer.includes('m2') || renderer.includes('m3'))) {
+                arch = 'arm64'
+              } else if (renderer.includes('intel') || renderer.includes('amd')) {
+                arch = 'x64'
+              }
+            }
+          }
+        } catch (e) {
+          // WebGL detection failed, continue
+        }
+      }
+      
+      // Method 3: Use screen resolution heuristic (Apple Silicon Macs often have high DPI)
+      if (arch === 'unknown') {
+        const pixelRatio = window.devicePixelRatio || 1
+        const screenWidth = screen.width * pixelRatio
+        const screenHeight = screen.height * pixelRatio
+        
+        // Common Apple Silicon Mac resolutions
+        const appleResolutions = [
+          [2560, 1600], // 13" MacBook Air/Pro M1/M2
+          [3024, 1964], // 14" MacBook Pro M1/M2/M3 Pro/Max
+          [3456, 2234], // 16" MacBook Pro M1/M2/M3 Pro/Max
+          [4480, 2520], // 24" iMac M1
+          [5120, 2880], // 27" iMac (potential future M-series)
+          [6016, 3384], // 32" Pro Display XDR (often used with Mac Studio)
+        ]
+        
+        const matchesAppleResolution = appleResolutions.some(([w, h]) => 
+          (screenWidth === w && screenHeight === h) || (screenWidth === h && screenHeight === w)
+        )
+        
+        if (matchesAppleResolution && pixelRatio >= 2) {
+          arch = 'arm64'
+        } else {
+          arch = 'x64' // Conservative default for Intel
+        }
+      }
+      
+      // Final fallback: default to arm64 for modern detection
+      if (arch === 'unknown') {
+        // Since most new Macs are Apple Silicon, default to arm64
+        arch = 'arm64'
+      }
+      
+    } catch (e) {
+      // If all detection fails, default to arm64 for modern Macs
       arch = 'arm64'
-    } else {
-      // Default to x64 for Intel Macs, but many modern Macs are Apple Silicon
-      // We'll use a heuristic based on user agent version
-      arch = 'arm64' // Default to Apple Silicon for newer Macs
     }
   } else if (os === 'linux') {
     // Default to x64 for Linux

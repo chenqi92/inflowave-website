@@ -22,96 +22,56 @@ const Features = () => {
       icon: Database,
       title: t('features.multiConnection.title'),
       description: t('features.multiConnection.description'),
-      details: [
-        'Simultaneous connections to multiple InfluxDB instances',
-        'Intelligent connection pooling and health monitoring',
-        'Automatic reconnection and failover handling',
-        'Connection status indicators and alerts'
-      ],
+      details: t('features.detailedFeatures.multiConnection.details', { returnObjects: true }) as string[],
       color: 'from-blue-500 to-blue-600'
     },
     {
       icon: BarChart3,
       title: t('features.visualQuery.title'),
       description: t('features.visualQuery.description'),
-      details: [
-        'Syntax highlighting for InfluxQL queries',
-        'Smart auto-completion and suggestions',
-        'Query history and bookmarks',
-        'Real-time result visualization'
-      ],
+      details: t('features.detailedFeatures.visualQuery.details', { returnObjects: true }) as string[],
       color: 'from-green-500 to-green-600'
     },
     {
       icon: Layers,
       title: t('features.charts.title'),
       description: t('features.charts.description'),
-      details: [
-        'Line charts, bar charts, and scatter plots',
-        'Interactive data exploration',
-        'Custom chart configurations',
-        'Export charts as images or PDFs'
-      ],
+      details: t('features.detailedFeatures.charts.details', { returnObjects: true }) as string[],
       color: 'from-purple-500 to-purple-600'
     },
     {
       icon: Import,
       title: t('features.dataImportExport.title'),
       description: t('features.dataImportExport.description'),
-      details: [
-        'Support for CSV, JSON, Excel formats',
-        'Batch data processing capabilities',
-        'Data validation and error handling',
-        'Scheduled import/export operations'
-      ],
+      details: t('features.detailedFeatures.dataImportExport.details', { returnObjects: true }) as string[],
       color: 'from-orange-500 to-orange-600'
     },
     {
       icon: Palette,
       title: t('features.modernUI.title'),
       description: t('features.modernUI.description'),
-      details: [
-        'Clean and intuitive interface design',
-        'Dark and light theme support',
-        'Responsive layout for all screen sizes',
-        'Customizable workspace layouts'
-      ],
+      details: t('features.detailedFeatures.modernUI.details', { returnObjects: true }) as string[],
       color: 'from-pink-500 to-pink-600'
     },
     {
       icon: Monitor,
       title: t('features.crossPlatform.title'),
       description: t('features.crossPlatform.description'),
-      details: [
-        'Native apps for Windows, macOS, and Linux',
-        'Consistent user experience across platforms',
-        'Platform-specific optimizations',
-        'Automatic updates and notifications'
-      ],
+      details: t('features.detailedFeatures.crossPlatform.details', { returnObjects: true }) as string[],
       color: 'from-indigo-500 to-indigo-600'
     },
     {
       icon: Shield,
       title: t('features.security.title'),
       description: t('features.security.description'),
-      details: [
-        'Encrypted connection protocols (TLS/SSL)',
-        'Local credential storage with encryption',
-        'Audit logs and security monitoring',
-        'Role-based access control support'
-      ],
+      details: t('features.detailedFeatures.security.details', { returnObjects: true }) as string[],
       color: 'from-red-500 to-red-600'
     },
     {
       icon: Zap,
       title: t('features.performance.title'),
       description: t('features.performance.description'),
-      details: [
-        'Built with Rust for optimal performance',
-        'Efficient memory management',
-        'Fast query execution and rendering',
-        'Minimal resource consumption'
-      ],
+      details: t('features.detailedFeatures.performance.details', { returnObjects: true }) as string[],
       color: 'from-yellow-500 to-yellow-600'
     }
   ]
@@ -208,30 +168,74 @@ const Features = () => {
                   <div className="flex-1">
                     <div className="relative">
                       {(() => {
-                        // Map features to their corresponding screenshots
-                        const screenshotMap: { [key: string]: string } = {
-                          'Multi-Database Connection': 'multi-connection',
-                          'Visual Query Editor': 'query-editor', 
-                          'Advanced Charts': 'advanced-charts',
-                          'Data Import/Export': 'data-import-export',
-                          'Modern Interface': 'modern-ui',
-                          'Cross-Platform': 'cross-platform',
-                          'Security & Reliability': 'security-reliable',
-                          'High Performance': 'high-performance'
+                        // Map features to their corresponding screenshots based on feature icons
+                        let screenshotId = ''
+                        
+                        if (feature.icon === Database) {
+                          screenshotId = 'multi-connection'
+                        } else if (feature.icon === BarChart3) {
+                          screenshotId = 'query-editor'
+                        } else if (feature.icon === Layers) {
+                          screenshotId = 'advanced-charts'
+                        } else if (feature.icon === Import) {
+                          screenshotId = 'data-import-export'
+                        } else if (feature.icon === Palette) {
+                          screenshotId = 'modern-ui'
+                        } else if (feature.icon === Monitor) {
+                          screenshotId = 'cross-platform'
+                        } else if (feature.icon === Shield) {
+                          screenshotId = 'security-reliable'
+                        } else if (feature.icon === Zap) {
+                          screenshotId = 'high-performance'
                         }
                         
-                        const screenshotId = screenshotMap[feature.title] || screenshotMap[Object.keys(screenshotMap).find(key => feature.title.includes(key.split(' ')[0])) || '']
                         const screenshot = screenshots.find(s => s.id === screenshotId)
                         
                         if (screenshot) {
                           return (
-                            <div className="aspect-video overflow-hidden rounded-2xl shadow-xl group">
+                            <div className="aspect-video overflow-hidden rounded-2xl shadow-xl group cursor-pointer"
+                                 onClick={() => {
+                                   // Create and show modal for image zoom
+                                   const modal = document.createElement('div')
+                                   modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4'
+                                   modal.style.zIndex = '9999'
+                                   modal.innerHTML = `
+                                     <div class="relative max-w-7xl max-h-full">
+                                       <img src="/screenshots/${screenshot.filename}" 
+                                            alt="${screenshot.title.en}" 
+                                            class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+                                       <button class="absolute top-4 right-4 text-white hover:text-gray-300 text-4xl font-bold">&times;</button>
+                                     </div>
+                                   `
+                                   document.body.appendChild(modal)
+                                   
+                                   // Close modal on click
+                                   modal.addEventListener('click', (e) => {
+                                     if (e.target === modal || (e.target as HTMLElement).tagName === 'BUTTON') {
+                                       document.body.removeChild(modal)
+                                     }
+                                   })
+                                   
+                                   // Close modal on escape key
+                                   const handleEscape = (e: KeyboardEvent) => {
+                                     if (e.key === 'Escape') {
+                                       document.body.removeChild(modal)
+                                       document.removeEventListener('keydown', handleEscape)
+                                     }
+                                   }
+                                   document.addEventListener('keydown', handleEscape)
+                                 }}>
                               <img
                                 src={`/screenshots/${screenshot.filename}`}
                                 alt={screenshot.title.en}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 loading="lazy"
                               />
+                              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                                <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black bg-opacity-50 px-3 py-1 rounded">
+                                  点击放大
+                                </div>
+                              </div>
                             </div>
                           )
                         }
@@ -334,17 +338,17 @@ const Features = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Experience the Power of InfloWave
+              {t('features.ctaSection.title')}
             </h2>
             <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-              Try all these features and more in the full version of InfloWave.
+              {t('features.ctaSection.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="/download"
                 className="bg-white text-primary-600 hover:bg-gray-100 font-medium px-8 py-4 rounded-lg transition-colors duration-200 flex items-center space-x-2 hover-lift"
               >
-                <span>Download Now</span>
+                <span>{t('features.ctaSection.downloadButton')}</span>
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
@@ -353,7 +357,7 @@ const Features = () => {
                 rel="noopener noreferrer"
                 className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium px-8 py-4 rounded-lg transition-all duration-200 flex items-center space-x-2 hover-lift"
               >
-                <span>View on GitHub</span>
+                <span>{t('features.ctaSection.githubButton')}</span>
                 <ArrowRight className="w-5 h-5" />
               </a>
             </div>

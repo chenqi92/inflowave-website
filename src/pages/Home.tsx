@@ -289,13 +289,49 @@ const Home = () => {
                 variants={itemVariants}
                 className="group relative bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden hover-lift"
               >
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden cursor-pointer relative"
+                     onClick={() => {
+                       // Create and show modal for image zoom
+                       const modal = document.createElement('div')
+                       modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4'
+                       modal.style.zIndex = '9999'
+                       modal.innerHTML = `
+                         <div class="relative max-w-7xl max-h-full">
+                           <img src="/screenshots/${screenshot.filename}" 
+                                alt="${screenshot.title.en}" 
+                                class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+                           <button class="absolute top-4 right-4 text-white hover:text-gray-300 text-4xl font-bold">&times;</button>
+                         </div>
+                       `
+                       document.body.appendChild(modal)
+                       
+                       // Close modal on click
+                       modal.addEventListener('click', (e) => {
+                         if (e.target === modal || (e.target as HTMLElement).tagName === 'BUTTON') {
+                           document.body.removeChild(modal)
+                         }
+                       })
+                       
+                       // Close modal on escape key
+                       const handleEscape = (e: KeyboardEvent) => {
+                         if (e.key === 'Escape') {
+                           document.body.removeChild(modal)
+                           document.removeEventListener('keydown', handleEscape)
+                         }
+                       }
+                       document.addEventListener('keydown', handleEscape)
+                     }}>
                   <img
                     src={`/screenshots/${screenshot.filename}`}
                     alt={screenshot.title.en}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                    <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium bg-black bg-opacity-50 px-3 py-1 rounded">
+                      点击放大
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4">
                   <h3 className="font-medium text-gray-900 dark:text-white mb-2">
