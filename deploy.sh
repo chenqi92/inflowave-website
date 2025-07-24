@@ -25,8 +25,8 @@ echo "🧹 Running linter..."
 npm run lint
 
 # Build the project
-echo "🏗️ Building project..."
-npm run build
+echo "🏗️ Building project for production..."
+npm run build:prod
 
 # Check if build was successful
 if [ ! -d "dist" ]; then
@@ -35,6 +35,15 @@ if [ ! -d "dist" ]; then
 fi
 
 echo "✅ Build completed successfully!"
+
+# Verify console.log removal
+echo "🔍 Verifying console.log removal..."
+if grep -r "console\.log" dist/assets/ > /dev/null 2>&1; then
+    echo "❌ WARNING: console.log found in production build!"
+    grep -r "console\.log" dist/assets/ | head -5
+else  
+    echo "✅ SUCCESS: console.log successfully removed from production build"
+fi
 
 # Optional: Deploy to specific platforms
 case "${1}" in

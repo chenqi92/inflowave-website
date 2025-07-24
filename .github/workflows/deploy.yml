@@ -1,0 +1,101 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run type check
+      run: npm run type-check
+    
+    - name: Run linter
+      run: npm run lint
+    
+    - name: Build project (Production Mode)
+      run: npm run build:prod  # 明确使用生产模式构建
+      env:
+        NODE_ENV: production
+    
+    - name: Verify console.log removal
+      run: |
+        echo "🔍 Checking if console.log was removed from build..."
+        if grep -r "console\.log" dist/assets/ > /dev/null 2>&1; then
+          echo "❌ ERROR: console.log found in build output!"
+          grep -r "console\.log" dist/assets/ || true
+          exit 1
+        else
+          echo "✅ SUCCESS: console.log successfully removed from production build"
+        fi
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist-${{ matrix.node-version }}
+        path: dist/
+        retention-days: 30
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build for production
+      run: npm run build:prod
+      env:
+        NODE_ENV: production
+    
+    # 可选：部署到不同平台
+    # - name: Deploy to Netlify
+    #   if: success()
+    #   run: |
+    #     npm install -g netlify-cli
+    #     netlify deploy --prod --dir=dist --auth=${{ secrets.NETLIFY_TOKEN }} --site=${{ secrets.NETLIFY_SITE_ID }}
+    
+    # - name: Deploy to Vercel  
+    #   if: success()
+    #   run: |
+    #     npm install -g vercel
+    #     vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+    
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        cname: your-custom-domain.com  # 如果有自定义域名
