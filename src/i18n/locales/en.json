@@ -295,7 +295,7 @@
     "downloadSources": {
       "github": "GitHub Download",
       "cdnMirror": "CDN Mirror",
-      "cdnDescription": "Cloudflare R2 CDN mirror for faster downloads"
+      "cdnDescription": "CDN mirror for faster downloads"
     }
   },
   "footer": {

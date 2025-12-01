@@ -54,6 +54,19 @@ export const screenshots: Screenshot[] = [
     category: 'features'
   },
   {
+    id: 'object-storage',
+    filename: '对象储存管理.png',
+    title: {
+      en: 'Object Storage Management',
+      zh: '对象存储管理'
+    },
+    description: {
+      en: 'S3-compatible object storage connection management',
+      zh: 'S3 兼容对象存储连接管理'
+    },
+    category: 'features'
+  },
+  {
     id: 'advanced-charts',
     filename: '高级图表.png',
     title: {

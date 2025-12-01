@@ -178,9 +178,11 @@ const Features = () => {
                       {(() => {
                         // Map features to their corresponding screenshots based on feature icons
                         let screenshotId = ''
-                        
+
                         if (feature.icon === Database) {
                           screenshotId = 'multi-connection'
+                        } else if (feature.icon === HardDrive) {
+                          screenshotId = 'object-storage'
                         } else if (feature.icon === BarChart3) {
                           screenshotId = 'query-editor'
                         } else if (feature.icon === Layers) {

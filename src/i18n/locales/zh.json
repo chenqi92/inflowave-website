@@ -295,7 +295,7 @@
     "downloadSources": {
       "github": "GitHub 下载",
       "cdnMirror": "CDN 镜像",
-      "cdnDescription": "Cloudflare R2 CDN 镜像，提供更快的下载速度"
+      "cdnDescription": "CDN 镜像下载，提供更快的下载速度"
     }
   },
   "footer": {

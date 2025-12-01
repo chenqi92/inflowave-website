@@ -47,7 +47,7 @@ export interface ReleaseData {
 
 const GITHUB_REPO = 'chenqi92/inflowave'
 const GITHUB_API_BASE = 'https://api.github.com'
-const R2_CDN_BASE = 'https://cdn.inflowave.com' // Cloudflare R2 CDN base URL
+const R2_CDN_BASE = 'https://inflowave.download.kkape.com/releases' // Cloudflare R2 CDN base URL
 
 // Cache for storing release data
 let releaseCache: ReleaseData | null = null
@@ -70,7 +70,7 @@ function formatFileSize(bytes: number): string {
 /**
  * Parse asset filename to extract platform and type information
  */
-function parseAssetInfo(asset: GitHubAsset): ParsedDownload | null {
+function parseAssetInfo(asset: GitHubAsset, version: string): ParsedDownload | null {
   const { name, size, browser_download_url } = asset
   const lowerName = name.toLowerCase()
   
@@ -118,7 +118,7 @@ function parseAssetInfo(asset: GitHubAsset): ParsedDownload | null {
   // Add R2 CDN mirror for specific files
   let r2Url: string | undefined
   if (lowerName.includes('aarch64.dmg') || lowerName.includes('x64_zh-cn.msi')) {
-    r2Url = `${R2_CDN_BASE}/${name}`
+    r2Url = `${R2_CDN_BASE}/v${version}/${name}`
   }
 
   return {
@@ -156,22 +156,25 @@ export async function fetchLatestRelease(): Promise<ReleaseData> {
     }
     
     const release: GitHubRelease = await response.json()
-    
+
+    // Extract version first (remove 'v' prefix if present)
+    const version = release.tag_name.replace(/^v/, '')
+
     // Parse downloads from assets
     const downloads: ParsedDownload[] = release.assets
-      .map(parseAssetInfo)
+      .map(asset => parseAssetInfo(asset, version))
       .filter((download): download is ParsedDownload => download !== null)
       .sort((a, b) => {
         // Sort by platform, then by recommended status
         const platformOrder = { windows: 0, macos: 1, linux: 2 }
         const platformDiff = platformOrder[a.platform] - platformOrder[b.platform]
         if (platformDiff !== 0) return platformDiff
-        
+
         return (b.recommended ? 1 : 0) - (a.recommended ? 1 : 0)
       })
-    
+
     const releaseData: ReleaseData = {
-      version: release.tag_name.replace(/^v/, ''), // Remove 'v' prefix if present
+      version,
       releaseDate: new Date(release.published_at).toISOString().split('T')[0], // YYYY-MM-DD format
       releaseNotes: release.body || '',
       downloads,
