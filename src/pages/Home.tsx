@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { 
-  Download, 
-  Github, 
+import {
+  Download,
+  Github,
   Star,
   Database,
   BarChart3,
@@ -13,7 +13,8 @@ import {
   Import,
   Palette,
   ArrowRight,
-  Play
+  Play,
+  HardDrive
 } from 'lucide-react'
 import { useLanguage } from '../providers/LanguageProvider'
 import { useLatestVersion } from '../hooks/useRelease'
@@ -29,6 +30,11 @@ const Home = () => {
       icon: Database,
       title: t('features.multiConnection.title'),
       description: t('features.multiConnection.description')
+    },
+    {
+      icon: HardDrive,
+      title: t('features.objectStorage.title'),
+      description: t('features.objectStorage.description')
     },
     {
       icon: BarChart3,

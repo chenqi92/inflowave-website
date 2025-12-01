@@ -33,6 +33,7 @@ export interface ParsedDownload {
   name: string
   size: string
   url: string
+  r2Url?: string // Cloudflare R2 CDN mirror URL
   recommended?: boolean
 }
 
@@ -46,6 +47,7 @@ export interface ReleaseData {
 
 const GITHUB_REPO = 'chenqi92/inflowave'
 const GITHUB_API_BASE = 'https://api.github.com'
+const R2_CDN_BASE = 'https://cdn.inflowave.com' // Cloudflare R2 CDN base URL
 
 // Cache for storing release data
 let releaseCache: ReleaseData | null = null
@@ -112,7 +114,13 @@ function parseAssetInfo(asset: GitHubAsset): ParsedDownload | null {
     (platform === 'macos' && type === 'dmg') ||
     (platform === 'linux' && type === 'appimage')
   )
-  
+
+  // Add R2 CDN mirror for specific files
+  let r2Url: string | undefined
+  if (lowerName.includes('aarch64.dmg') || lowerName.includes('x64_zh-cn.msi')) {
+    r2Url = `${R2_CDN_BASE}/${name}`
+  }
+
   return {
     type,
     platform,
@@ -120,6 +128,7 @@ function parseAssetInfo(asset: GitHubAsset): ParsedDownload | null {
     name: asset.name,
     size: formatFileSize(size),
     url: browser_download_url,
+    r2Url,
     recommended
   }
 }

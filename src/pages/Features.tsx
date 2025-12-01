@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { 
+import {
   Database,
   BarChart3,
   Layers,
@@ -9,7 +9,8 @@ import {
   Shield,
   Zap,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  HardDrive
 } from 'lucide-react'
 import { useLanguage } from '../providers/LanguageProvider'
 import { screenshots } from '../data/screenshots'
@@ -24,6 +25,13 @@ const Features = () => {
       description: t('features.multiConnection.description'),
       details: t('features.detailedFeatures.multiConnection.details', { returnObjects: true }) as string[],
       color: 'from-blue-500 to-blue-600'
+    },
+    {
+      icon: HardDrive,
+      title: t('features.objectStorage.title'),
+      description: t('features.objectStorage.description'),
+      details: t('features.detailedFeatures.objectStorage.details', { returnObjects: true }) as string[],
+      color: 'from-cyan-500 to-cyan-600'
     },
     {
       icon: BarChart3,

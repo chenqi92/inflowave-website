@@ -29,6 +29,10 @@
       "title": "Multi-Connection Management",
       "description": "Manage multiple InfluxDB instances simultaneously with intelligent connection pooling and status monitoring."
     },
+    "objectStorage": {
+      "title": "Object Storage Management",
+      "description": "Support for S3-compatible object storage connection management, including AWS S3, MinIO, Cloudflare R2, and more."
+    },
     "visualQuery": {
       "title": "Visual Query Editor",
       "description": "Professional InfluxQL query editor with syntax highlighting, auto-completion, and result visualization."
@@ -104,6 +108,14 @@
           "Intelligent connection pooling and health monitoring",
           "Automatic reconnection and failover handling",
           "Connection status indicators and alerts"
+        ]
+      },
+      "objectStorage": {
+        "details": [
+          "Support for AWS S3, MinIO, Cloudflare R2, and more",
+          "S3-compatible object storage connection management",
+          "Secure access key storage",
+          "Bucket browsing and file management"
         ]
       },
       "visualQuery": {
@@ -279,6 +291,11 @@
       "github": "Source code and issues",
       "releases": "What's new in v{{version}}",
       "issues": "Report bugs or get help"
+    },
+    "downloadSources": {
+      "github": "GitHub Download",
+      "cdnMirror": "CDN Mirror",
+      "cdnDescription": "Cloudflare R2 CDN mirror for faster downloads"
     }
   },
   "footer": {
@@ -332,6 +349,7 @@
     "close": "Close",
     "openSource": "Open Source",
     "free": "Free",
-    "crossPlatform": "Cross Platform"
+    "crossPlatform": "Cross Platform",
+    "recommended": "Recommended"
   }
 }

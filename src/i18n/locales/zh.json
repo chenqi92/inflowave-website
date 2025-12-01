@@ -29,6 +29,10 @@
       "title": "多连接管理",
       "description": "同时管理多个 InfluxDB 实例，具备智能连接池和状态监控功能。"
     },
+    "objectStorage": {
+      "title": "对象存储管理",
+      "description": "支持 S3 兼容对象存储的连接管理，包括 AWS S3、MinIO、Cloudflare R2 等。"
+    },
     "visualQuery": {
       "title": "可视化查询编辑器",
       "description": "专业的 InfluxQL 查询编辑器，支持语法高亮、自动补全和结果可视化。"
@@ -104,6 +108,14 @@
           "智能连接池和健康监控",
           "自动重连和故障转移处理",
           "连接状态指示器和警报"
+        ]
+      },
+      "objectStorage": {
+        "details": [
+          "支持 AWS S3、MinIO、Cloudflare R2 等",
+          "S3 兼容对象存储连接管理",
+          "安全的访问密钥存储",
+          "存储桶浏览和文件管理"
         ]
       },
       "visualQuery": {
@@ -279,6 +291,11 @@
       "github": "源代码和问题反馈",
       "releases": "v{{version}} 版本新特性",
       "issues": "报告错误或获取帮助"
+    },
+    "downloadSources": {
+      "github": "GitHub 下载",
+      "cdnMirror": "CDN 镜像",
+      "cdnDescription": "Cloudflare R2 CDN 镜像，提供更快的下载速度"
     }
   },
   "footer": {
@@ -332,6 +349,7 @@
     "close": "关闭",
     "openSource": "开源",
     "free": "免费",
-    "crossPlatform": "跨平台"
+    "crossPlatform": "跨平台",
+    "recommended": "推荐"
   }
 }
