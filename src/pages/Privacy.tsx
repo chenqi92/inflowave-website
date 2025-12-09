@@ -10,31 +10,31 @@ const Privacy = () => {
       icon: Eye,
       title: t('privacy.dataCollection.title'),
       content: t('privacy.dataCollection.content'),
-      items: t('privacy.dataCollection.items', { returnObjects: true }) as string[]
+      items: t('privacy.dataCollection.items', {returnObjects: true}) as unknown as string[]
     },
     {
       icon: Database,
       title: t('privacy.localStorage.title'),
       content: t('privacy.localStorage.content'),
-      items: t('privacy.localStorage.items', { returnObjects: true }) as string[]
+      items: t('privacy.localStorage.items', {returnObjects: true}) as unknown as string[]
     },
     {
       icon: Lock,
       title: t('privacy.dataSecurity.title'),
       content: t('privacy.dataSecurity.content'),
-      items: t('privacy.dataSecurity.items', { returnObjects: true }) as string[]
+      items: t('privacy.dataSecurity.items', {returnObjects: true}) as unknown as string[]
     },
     {
       icon: Shield,
       title: t('privacy.thirdParty.title'),
       content: t('privacy.thirdParty.content'),
-      items: t('privacy.thirdParty.items', { returnObjects: true }) as string[]
+      items: t('privacy.thirdParty.items', {returnObjects: true}) as unknown as string[]
     },
     {
       icon: FileText,
       title: t('privacy.openSource.title'),
       content: t('privacy.openSource.content'),
-      items: t('privacy.openSource.items', { returnObjects: true }) as string[]
+      items: t('privacy.openSource.items', {returnObjects: true}) as unknown as string[]
     }
   ]
 
