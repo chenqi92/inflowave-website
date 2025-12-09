@@ -108,12 +108,19 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-4 text-sm text-gray-400">
+            <div className="flex items-center flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 text-sm text-gray-400">
               <span>{t('footer.copyright', { year: currentYear })}</span>
               <span>•</span>
               <span>{t('footer.license')}</span>
+              <span>•</span>
+              <Link
+                to="/privacy"
+                className="hover:text-white transition-colors duration-200"
+              >
+                {t('footer.privacy')}
+              </Link>
             </div>
-            
+
             <div className="flex items-center space-x-2 text-sm text-gray-400">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500" />

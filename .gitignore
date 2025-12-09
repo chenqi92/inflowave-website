@@ -42,6 +42,5 @@ build/
 .pnpm-error.log*
 
 # Static assets (to be replaced with actual screenshots)
-public/screenshots/
 public/og-image.jpg
 public/favicon.png

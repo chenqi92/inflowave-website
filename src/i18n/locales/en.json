@@ -314,7 +314,8 @@
       "support": "Support"
     },
     "copyright": "© {{year}} InfloWave. All rights reserved.",
-    "license": "Licensed under MIT License"
+    "license": "Licensed under MIT License",
+    "privacy": "Privacy Policy"
   },
   "changelog": {
     "title": "Changelog",
@@ -351,5 +352,66 @@
     "free": "Free",
     "crossPlatform": "Cross Platform",
     "recommended": "Recommended"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "We value your privacy. InfloWave is a fully local desktop application",
+    "lastUpdated": "Last Updated: {{date}}",
+    "dataCollection": {
+      "title": "Data Collection",
+      "content": "InfloWave is a desktop application that does not collect, store, or transmit any personal data to external servers.",
+      "items": [
+        "No personal identification information is collected",
+        "No analytics or tracking tools are used",
+        "No data is sent to third parties",
+        "All data is stored entirely on your local device"
+      ]
+    },
+    "localStorage": {
+      "title": "Local Data Storage",
+      "content": "InfloWave stores all configuration and connection information on your local device. This data includes:",
+      "items": [
+        "InfluxDB database connection configurations (server address, port, credentials)",
+        "Object storage connection configurations (access keys and endpoints for S3-compatible services)",
+        "Application settings and preferences",
+        "Query history and bookmarks",
+        "All sensitive information is encrypted and stored locally"
+      ]
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "content": "We take multiple measures to ensure your data security:",
+      "items": [
+        "All database connections use TLS/SSL encryption protocols",
+        "Locally stored credentials are protected with encryption algorithms",
+        "No credentials or sensitive information are sent to our servers",
+        "You can delete all locally stored data at any time"
+      ]
+    },
+    "thirdParty": {
+      "title": "Third-Party Services",
+      "content": "InfloWave may connect to the following third-party services, but only when you explicitly configure them:",
+      "items": [
+        "Your configured InfluxDB database instances",
+        "Your configured S3-compatible object storage services",
+        "GitHub (only for checking software updates and downloading releases)",
+        "We do not share your personal information with these services"
+      ]
+    },
+    "openSource": {
+      "title": "Open Source Transparency",
+      "content": "InfloWave is an open-source project with fully transparent code:",
+      "items": [
+        "Source code is hosted on GitHub and available for anyone to review",
+        "You can verify that the application does not collect or transmit your data",
+        "Community contributions and security audits are welcome",
+        "Licensed under the MIT open-source license"
+      ]
+    },
+    "contact": {
+      "title": "Contact Us",
+      "content": "If you have any questions or concerns about this privacy policy, please contact us through GitHub Issues.",
+      "button": "Visit GitHub Issues"
+    }
   }
 }

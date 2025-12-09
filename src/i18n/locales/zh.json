@@ -314,7 +314,8 @@
       "support": "支持"
     },
     "copyright": "© {{year}} InfloWave。保留所有权利。",
-    "license": "基于 MIT 许可证授权"
+    "license": "基于 MIT 许可证授权",
+    "privacy": "隐私策略"
   },
   "changelog": {
     "title": "更新日志",
@@ -351,5 +352,66 @@
     "free": "免费",
     "crossPlatform": "跨平台",
     "recommended": "推荐"
+  },
+  "privacy": {
+    "title": "隐私策略",
+    "subtitle": "我们重视您的隐私，InfloWave 是一款完全本地化的桌面应用程序",
+    "lastUpdated": "最后更新：{{date}}",
+    "dataCollection": {
+      "title": "数据收集",
+      "content": "InfloWave 是一款桌面应用程序，不收集、存储或传输任何个人数据到外部服务器。",
+      "items": [
+        "不收集任何个人身份信息",
+        "不使用任何分析或跟踪工具",
+        "不向第三方发送任何数据",
+        "所有数据完全存储在您的本地设备上"
+      ]
+    },
+    "localStorage": {
+      "title": "本地数据存储",
+      "content": "InfloWave 将所有配置和连接信息存储在您的本地设备上。这些数据包括：",
+      "items": [
+        "InfluxDB 数据库连接配置（服务器地址、端口、凭证）",
+        "对象存储连接配置（S3 兼容服务的访问密钥和端点）",
+        "应用程序设置和偏好",
+        "查询历史和书签",
+        "所有敏感信息均使用加密存储在本地"
+      ]
+    },
+    "dataSecurity": {
+      "title": "数据安全",
+      "content": "我们采取多种措施确保您的数据安全：",
+      "items": [
+        "所有数据库连接使用 TLS/SSL 加密协议",
+        "本地存储的凭证使用加密算法保护",
+        "不会将任何凭证或敏感信息发送到我们的服务器",
+        "您可以随时删除本地存储的所有数据"
+      ]
+    },
+    "thirdParty": {
+      "title": "第三方服务",
+      "content": "InfloWave 可能会连接到以下第三方服务，但仅在您明确配置的情况下：",
+      "items": [
+        "您配置的 InfluxDB 数据库实例",
+        "您配置的 S3 兼容对象存储服务",
+        "GitHub（仅用于检查软件更新和下载发布版本）",
+        "我们不会与这些服务共享您的个人信息"
+      ]
+    },
+    "openSource": {
+      "title": "开源透明",
+      "content": "InfloWave 是一个开源项目，代码完全公开透明：",
+      "items": [
+        "源代码托管在 GitHub 上，任何人都可以审查",
+        "您可以验证应用程序不会收集或传输您的数据",
+        "欢迎社区贡献和安全审计",
+        "遵循 MIT 开源许可证"
+      ]
+    },
+    "contact": {
+      "title": "联系我们",
+      "content": "如果您对本隐私策略有任何疑问或顾虑，请通过 GitHub Issues 与我们联系。",
+      "button": "访问 GitHub Issues"
+    }
   }
 }

@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import Features from './pages/Features'
 import Download from './pages/Download'
 import Changelog from './pages/Changelog'
+import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
 
 // Providers
@@ -38,6 +39,7 @@ function App() {
               <Route path="/features" element={<Features />} />
               <Route path="/download" element={<Download />} />
               <Route path="/changelog" element={<Changelog />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </motion.main>
