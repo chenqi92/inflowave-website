@@ -59,11 +59,11 @@ const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
  */
 function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 B'
-  
+
   const k = 1024
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
-  
+
   return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i]
 }
 
@@ -73,51 +73,64 @@ function formatFileSize(bytes: number): string {
 function parseAssetInfo(asset: GitHubAsset, version: string): ParsedDownload | null {
   const { name, size, browser_download_url } = asset
   const lowerName = name.toLowerCase()
-  
+
+  // Skip Tauri updater files (.app.tar.gz) and signature files early
+  if (lowerName.endsWith('.app.tar.gz') || lowerName.endsWith('.sig')) {
+    return null
+  }
+
   let platform: ParsedDownload['platform']
   let type: ParsedDownload['type']
   let arch: ParsedDownload['arch'] = 'x64' // default
-  
+
   // Determine platform and type
-  if (lowerName.includes('.msi') || lowerName.includes('windows') || lowerName.includes('win')) {
+  // Note: avoid using includes('win') as it falsely matches 'darwin'
+  if (lowerName.endsWith('.msi')) {
     platform = 'windows'
     type = lowerName.includes('portable') ? 'portable' : 'installer'
-  } else if (lowerName.includes('.dmg') || lowerName.includes('macos') || lowerName.includes('darwin')) {
+  } else if (lowerName.endsWith('.exe')) {
+    platform = 'windows'
+    type = lowerName.includes('portable') ? 'portable' : 'installer'
+  } else if (lowerName.endsWith('.dmg')) {
     platform = 'macos'
     type = 'dmg'
-  } else if (lowerName.includes('.appimage')) {
+  } else if (lowerName.endsWith('.appimage')) {
     platform = 'linux'
     type = 'appimage'
-  } else if (lowerName.includes('.deb')) {
+  } else if (lowerName.endsWith('.deb')) {
     platform = 'linux'
     type = 'deb'
-  } else if (lowerName.includes('.rpm')) {
+  } else if (lowerName.endsWith('.rpm')) {
     platform = 'linux'
     type = 'rpm'
   } else {
     // Skip unknown file types
     return null
   }
-  
+
   // Determine architecture
   if (lowerName.includes('aarch64') || lowerName.includes('arm64')) {
     arch = 'aarch64'
-  } else if (lowerName.includes('x86_64') || lowerName.includes('_x64')) {
+  } else if (lowerName.includes('x86_64') || lowerName.includes('_x64') || lowerName.includes('amd64')) {
     arch = 'x64'
   } else if (lowerName.includes('i686') || lowerName.includes('_x86')) {
     arch = 'x86'
   }
-  
+
   // Determine if this is the recommended download
   const recommended = (
-    (platform === 'windows' && type === 'installer' && arch === 'x64') ||
+    (platform === 'windows' && type === 'installer' && arch === 'x64' && lowerName.includes('.msi')) ||
     (platform === 'macos' && type === 'dmg') ||
     (platform === 'linux' && type === 'appimage')
   )
 
-  // Add R2 CDN mirror for specific files
+  // Add R2 CDN mirror for user-facing download files
+  // Excludes .app.tar.gz (Tauri updater files) which are already filtered out above
   let r2Url: string | undefined
-  if (lowerName.includes('aarch64.dmg') || lowerName.includes('x64_zh-cn.msi')) {
+  const isUserDownload = lowerName.endsWith('.dmg') || lowerName.endsWith('.msi') ||
+    lowerName.endsWith('.exe') || lowerName.endsWith('.appimage') ||
+    lowerName.endsWith('.deb') || lowerName.endsWith('.rpm')
+  if (isUserDownload) {
     r2Url = `${R2_CDN_BASE}/v${version}/${name}`
   }
 
@@ -142,7 +155,7 @@ export async function fetchLatestRelease(): Promise<ReleaseData> {
   if (releaseCache && (now - cacheTimestamp) < CACHE_DURATION) {
     return releaseCache
   }
-  
+
   try {
     const response = await fetch(`${GITHUB_API_BASE}/repos/${GITHUB_REPO}/releases/latest`, {
       headers: {
@@ -150,11 +163,11 @@ export async function fetchLatestRelease(): Promise<ReleaseData> {
         'User-Agent': 'InfloWave-Website'
       }
     })
-    
+
     if (!response.ok) {
       throw new Error(`GitHub API responded with status: ${response.status}`)
     }
-    
+
     const release: GitHubRelease = await response.json()
 
     // Extract version first (remove 'v' prefix if present)
@@ -180,16 +193,16 @@ export async function fetchLatestRelease(): Promise<ReleaseData> {
       downloads,
       htmlUrl: release.html_url
     }
-    
+
     // Update cache
     releaseCache = releaseData
     cacheTimestamp = now
-    
+
     return releaseData
-    
+
   } catch (error) {
     console.error('Failed to fetch latest release:', error)
-    
+
     // Return fallback data if API fails
     return {
       version: '0.1.5',
@@ -212,13 +225,13 @@ export async function fetchAllReleases(limit: number = 10): Promise<GitHubReleas
         'User-Agent': 'InfloWave-Website'
       }
     })
-    
+
     if (!response.ok) {
       throw new Error(`GitHub API responded with status: ${response.status}`)
     }
-    
+
     return await response.json()
-    
+
   } catch (error) {
     console.error('Failed to fetch releases:', error)
     return []
@@ -231,24 +244,24 @@ export async function fetchAllReleases(limit: number = 10): Promise<GitHubReleas
 export async function getDownloadStats(): Promise<{ totalDownloads: number; latestReleaseDownloads: number }> {
   try {
     const releases = await fetchAllReleases(50) // Get more releases to calculate total
-    
+
     let totalDownloads = 0
     let latestReleaseDownloads = 0
-    
+
     releases.forEach((release, index) => {
       const releaseDownloads = release.assets.reduce((sum, asset) => sum + asset.download_count, 0)
       totalDownloads += releaseDownloads
-      
+
       if (index === 0) {
         latestReleaseDownloads = releaseDownloads
       }
     })
-    
+
     return {
       totalDownloads,
       latestReleaseDownloads
     }
-    
+
   } catch (error) {
     console.error('Failed to fetch download stats:', error)
     return {
